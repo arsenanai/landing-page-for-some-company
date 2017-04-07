@@ -25,10 +25,17 @@ class PermissionsTableSeeder extends Seeder
 		$manageContent->description = 'Permission to write, edit or delete site content';
 
 		$permissions = array($manageUser,$manageContent);
+		$adminRole = Role::where('name','admin')->firstOrFail();
+		$editorRole = Role::where('name','editor')->firstOrFail();
 
 		foreach( $permissions as $permission){
 			if(Permission::where('name',$permission->name)->count()==0){
 				$permission->save();
+				if($permission->name==='manage_users'){
+					$adminRole->attachPermission($manageUser);	
+				}else if($permission->name==='manage_content'){
+					$editorRole->attachPermission($manageContent);
+				}
 			}
 		}
 		/*DB::table('permissions')->insert(array(
