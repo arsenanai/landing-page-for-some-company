@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        '/CurPT2DSOE.php',
+        '/svkLQ7plfi.php',
     ];
 }

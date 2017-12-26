@@ -35,6 +35,7 @@ class PermissionsTableSeeder extends Seeder
 					$adminRole->attachPermission($manageUser);	
 				}else if($permission->name==='manage_content'){
 					$editorRole->attachPermission($manageContent);
+					$adminRole->attachPermission($manageContent);
 				}
 			}
 		}

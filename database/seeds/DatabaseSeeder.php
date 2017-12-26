@@ -20,5 +20,17 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersTableSeeder::class);
         $this->command->info("Users table seeded");
+
+        $this->call(LanguagesTableSeeder::class);
+        $this->command->info("Languages table seeded");
+
+        $this->call(PagesTableSeeder::class);
+        $this->command->info("Pages table seeded");
+
+        $this->call(CompaniesTableSeeder::class);
+        $this->command->info("Company added");
+
+        $this->call(NewsTableSeeder::class);
+        $this->command->info("News added");
     }
 }

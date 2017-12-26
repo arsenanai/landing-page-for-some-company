@@ -1,0 +1,12 @@
+html,body{
+	font-family: 'Roboto', sans-serif;
+}
+.input-group-btn{
+	width:0;
+}
+.input-group-addon{
+	width:0;
+}
+.loader-btn{
+	height: 20px;
+}

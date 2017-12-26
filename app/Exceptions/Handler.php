@@ -3,9 +3,11 @@
 namespace App\Exceptions;
 
 use Exception;
+use Error;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -32,6 +34,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        /*if ($this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }*/
         parent::report($exception);
     }
 
@@ -44,7 +49,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        //config('app.env')==='local'
+        //return parent::render($request, $exception);
+        if(config('app.env')!=='local'){
+            if(
+                $exception instanceof Error
+                && !($exception instanceof NotFoundHttpException) 
+                && !($exception instanceof ValidationException)
+                ){
+                return response()->view('errors.custom', ['exception'=>$exception], 500);
+            } else{
+                return parent::render($request, $exception);
+            }
+        }else{
+            return parent::render($request, $exception);
+        }
     }
 
     /**
@@ -59,7 +78,6 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
         return redirect()->guest(route('login'));
     }
 }
