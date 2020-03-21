@@ -21,7 +21,7 @@ class MailController extends Controller
                 'https://www.google.com/recaptcha/api/siteverify',
                 ['form_params'=>
                     [
-                        'secret'=>'6LfQQScUAAAAAJVs3kaBcWO8I875lmad6YhuzCNM',
+                        'secret'=>'your_captcha_key_here',
                         'response'=>$recaptcha
                      ]
                 ]
