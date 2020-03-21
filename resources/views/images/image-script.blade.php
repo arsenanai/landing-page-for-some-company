@@ -185,7 +185,7 @@
           cw=canvas.width;
           ch=canvas.height;
           ctx.font="50px verdana";
-          var text = "cybersec.kz";
+          var text = "abc.xyz";
           var tw=ctx.measureText(text).width;
           var th=this.getTextHeight(ctx.font);
           ctx.globalAlpha=.50;

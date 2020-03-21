@@ -17,15 +17,15 @@ class UsersTableSeeder extends Seeder
   	if(User::count()==0){
 			$admin = new User();
 			$admin->name = 'Admin';
-			$admin->email = 'admin@cybersec.kz';
-			$admin->password = bcrypt('admin@cybersec.kz');
+			$admin->email = 'admin@abc.xyz';
+			$admin->password = bcrypt('admin@abc.xyz');
 
 			$users = array($admin);
 			for ($x = 0; $x <= 1; $x++) {
 	    		$editor = new User();
 				$editor->name = 'Editor '.$x;
-				$editor->email = 'editor'.$x.'@cybersec.kz';
-				$editor->password = bcrypt('editor'.$x.'@cybersec.kz');
+				$editor->email = 'editor'.$x.'@abc.xyz';
+				$editor->password = bcrypt('editor'.$x.'@abc.xyz');
 				array_push($users,$editor);
 			}
 			
@@ -36,13 +36,13 @@ class UsersTableSeeder extends Seeder
 				if(User::where('email',$user->email)->count()==0){
 					$user->save();
 				}else{
-					if($user->email==='admin@cybersec.kz'){
-						$user = User::where('email','admin@cybersec.kz')->firstOrFail();
+					if($user->email==='admin@abc.xyz'){
+						$user = User::where('email','admin@abc.xyz')->firstOrFail();
 					}else if (strpos($user->name, 'Editor') !== false) {
 						$user = User::where('name',$user->name)->firstOrFail();
 					}
 				}
-				if($user->email==='admin@cybersec.kz'&&$user->hasRole('admin')==false){
+				if($user->email==='admin@abc.xyz'&&$user->hasRole('admin')==false){
 					$user->attachRole($adminRole);
 				}else if(strpos($user->name, 'Editor')!==false&&$user->hasRole('editor')==false){
 					$user->attachRole($editorRole);

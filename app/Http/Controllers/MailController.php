@@ -39,8 +39,8 @@ class MailController extends Controller
             	$email = request()->get("email");
             	$message = request()->get("msg");
                 //if(strpos($fio, ' ') !== false && strlen($fio)>3)
-                Mail::to(env('MAIL_USERNAME','contact@cybersec.kz'))
-                    ->queue(new ContactUs($fio,$phone,env('MAIL_USERNAME','contact@cybersec.kz'),$email.": ".$message));
+                Mail::to(env('MAIL_USERNAME','contact@abc.xyz'))
+                    ->queue(new ContactUs($fio,$phone,env('MAIL_USERNAME','contact@abc.xyz'),$email.": ".$message));
                 return "ok";
             }else{
                 abort(404);
